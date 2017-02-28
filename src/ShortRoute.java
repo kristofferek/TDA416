@@ -242,9 +242,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 		int    totNodes  = 0;
 		route.setText("");
 		karta.clearLayer(DrawGraph.Layer.OVERLAY);
-        System.out.println("Nu börjar vi leta");
 		Iterator<BusEdge> it = grafen.shortestPath( start, slut);
-		System.out.println("Nu har vi letat upp kortaste vägen");
 		while ( it.hasNext() ) {
 			BusEdge e = it.next();
 			route.append( makeText1(e) + "\n");

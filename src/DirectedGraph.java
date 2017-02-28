@@ -17,15 +17,17 @@ public class DirectedGraph<E extends Edge> {
 	}
 
 	public Iterator<E> shortestPath(int from, int to) {
-        List<Integer> visited = new ArrayList<>();
-	    PriorityQueue<CompDijkstraPath<E>> queue = new PriorityQueue<>();
-        queue.add(new CompDijkstraPath<>(from, 0, new LinkedList<>()));
+        List<Integer> visited = new ArrayList<>(); //Keeps track of the visited nodes.
+	    PriorityQueue<CompDijkstraPath<E>> queue = new PriorityQueue<>(); //Shortest path so far is always on top.
+        queue.add(new CompDijkstraPath<>(from, 0, new LinkedList<>())); // Start node
+
         while(!queue.isEmpty()){
             CompDijkstraPath<E> ssf = queue.poll();
             if (!visited.contains(ssf.getToNode())){
                 if (ssf.getToNode() == to) return ssf.getRoute().iterator();
-                visited.add(ssf.getToNode());
-                for (E e : edges[ssf.getToNode()]){
+
+                visited.add(ssf.getToNode()); // Mark as visited
+                for (E e : edges[ssf.getToNode()]){ // Add all neighbors to the queue.
                     if (!visited.contains(e.getDest())){
                         LinkedList<E> path = new LinkedList<>();
                         path.addAll(ssf.getRoute());
