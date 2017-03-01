@@ -43,6 +43,7 @@ public class DirectedGraph<E extends Edge> {
 	public Iterator<E> minimumSpanningTree()
     {
 
+        
         LinkedList<E>[] cc = new LinkedList[nbrOfNodes];
         PriorityQueue<CompKruskalEdge> kruskalPQ = new PriorityQueue<CompKruskalEdge>();
 
