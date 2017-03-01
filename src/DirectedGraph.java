@@ -43,51 +43,58 @@ public class DirectedGraph<E extends Edge> {
 	public Iterator<E> minimumSpanningTree()
     {
 
-        
+        //Create an Array of Nodes that contains its own LinkedList of Edges
         LinkedList<E>[] cc = new LinkedList[nbrOfNodes];
-        PriorityQueue<CompKruskalEdge> kruskalPQ = new PriorityQueue<CompKruskalEdge>();
-
         for (int i = 0; i < nbrOfNodes; i++)
             cc[i] = new LinkedList<E>();
 
+        //Create PriorityQueue for all the Edges;
+        PriorityQueue<CompKruskalEdge> kruskalPQ = new PriorityQueue<CompKruskalEdge>();
         for (int i = 0; i < edges.length; i++)
         {
             for (E temp : edges[i])
             kruskalPQ.add(new CompKruskalEdge(temp));
         }
 
+        //Create two LinkedList
+        LinkedList<E> longList = new LinkedList<E>();
+        LinkedList<E> shortList;
+
         while (!kruskalPQ.isEmpty() && cc.length > 1)
         {
+            //Pull the edge with the lowest weight in the pq
             CompKruskalEdge nextEdge = kruskalPQ.poll();
 
-            LinkedList<E> longList,shortList;
+            //Check if they point at the same LinkedList of Edges
             if (cc[nextEdge.getSource()] !=(cc[nextEdge.getDest()]))
             {
-                    if (cc[nextEdge.getSource()].size() > cc[nextEdge.getDest()].size() )
-                    {
-                        longList = cc[nextEdge.getSource()];
-                        shortList = cc[nextEdge.getDest()];
-                    }
-                    else {
-                        shortList = cc[nextEdge.getSource()];
-                        longList = cc[nextEdge.getDest()];
-                    }
+                //Set longList as the longer LinkedList and shortList as the shorter LinkedList
+                if (cc[nextEdge.getSource()].size() > cc[nextEdge.getDest()].size() )
+                {
+                    longList = cc[nextEdge.getSource()];
+                    shortList = cc[nextEdge.getDest()];
+                }
+                else {
+                    shortList = cc[nextEdge.getSource()];
+                    longList = cc[nextEdge.getDest()];
+                }
 
-                    for (E temp : shortList){
-                        longList.add(temp);
-                    }
+                //Add all the elements from shortList into longList
+                for (E temp : shortList){
+                    longList.add(temp);
+                }
+                //Add the Edge we pulled from pq into longList
+                longList.add((E) nextEdge.getEdge());
 
-                    longList.add((E) nextEdge.getEdge());
-                    for (E temp : longList){
-                        cc[temp.getSource()] = longList;
-                        cc[temp.getDest()] = longList;
-                    }
-                    if (longList.size() == nbrOfNodes-1)
-                        return longList .iterator();
+                //Make all the concern Nodes in cc to point at longList
+                for (E temp : longList){
+                    cc[temp.getSource()] = longList;
+                    cc[temp.getDest()] = longList;
                 }
             }
+        }
 
-        return null;
+        return longList.iterator();
 	}
 }
   
