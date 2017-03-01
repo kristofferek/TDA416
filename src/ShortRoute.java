@@ -242,7 +242,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 		int    totNodes  = 0;
 		route.setText("");
 		karta.clearLayer(DrawGraph.Layer.OVERLAY);
-		Iterator<BusEdge> it = grafen.shortestPath( start, slut); 
+		Iterator<BusEdge> it = grafen.shortestPath( start, slut);
 		while ( it.hasNext() ) {
 			BusEdge e = it.next();
 			route.append( makeText1(e) + "\n");
@@ -287,7 +287,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			// Read stops and put them in the node-table 
 			// in order to give the user a list of possible stops
 			// assume input file is correct
-			indata = new Scanner(new File("stops.noBOM.txt"), "UTF-8");
+			indata = new Scanner(new File("D:\\Git\\TDA416\\src\\stops.noBOM.txt"), "UTF-8");
 			while (indata.hasNext()) {
 				String hpl = indata.next().trim();
 				int xco = indata.nextInt();
@@ -305,7 +305,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			indata.close();
 			
 			//  Read in the lines and add to the graph
-			indata =  new Scanner(new File("lines.noBOM.txt"), "UTF-8");
+			indata =  new Scanner(new File("D:\\Git\\TDA416\\src\\lines.noBOM.txt"), "UTF-8");
 			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
 			while ( indata.hasNext() ) {
 				String lineNo = indata.next();
