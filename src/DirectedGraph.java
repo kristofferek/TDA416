@@ -25,6 +25,12 @@ public class DirectedGraph<E extends Edge> {
     }
 
 
+    /** Calculates the shorthest path between two nodes.
+     @param from Starting point of the path.
+     @param to End point of the path.
+     @return Iterator\<E> containing the edges that make up the shortest path.
+                returns null if there is no path between the nodes.
+     */
     public Iterator<E> shortestPath(int from, int to) {
         List<Integer> visited = new ArrayList<>(); //Keeps track of the visited nodes.
 	    PriorityQueue<CompDijkstraPath<E>> queue = new PriorityQueue<>(); //Shortest path so far is always on top.
