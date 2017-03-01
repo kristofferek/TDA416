@@ -23,7 +23,7 @@ public class DirectedGraph<E extends Edge> {
     public void addEdge(E e) {
 		edges[e.getSource()].add(e);
     }
-    
+
 
     public Iterator<E> shortestPath(int from, int to) {
         List<Integer> visited = new ArrayList<>(); //Keeps track of the visited nodes.

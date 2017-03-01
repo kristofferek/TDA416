@@ -307,7 +307,6 @@ public class ShortRoute extends JFrame implements ActionListener {
 			//  Read in the lines and add to the graph
 			indata =  new Scanner(new File("D:\\Git\\TDA416\\lines.noBOM.txt"), "UTF-8");
 			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
-			ArrayList<EdgeOffset> edgeOffsets = new ArrayList<>();
 			while ( indata.hasNext() ) {
 				String lineNo = indata.next();
 				int    antal  = indata.nextInt() -1;
@@ -326,17 +325,8 @@ public class ShortRoute extends JFrame implements ActionListener {
 					BusStop busFrom = noderna.find(from);
 					BusStop busTo   = noderna.find(to);
 
-					int offset = 0;
-					if (edgeOffsets.contains(new EdgeOffset(busFrom.getName()+busTo.getName()))){
-						EdgeOffset current = edgeOffsets.get(edgeOffsets.indexOf(new EdgeOffset(busFrom.getName()+busTo.getName())));
-						current.offset += 1;
-						offset = edgeOffsets.get(edgeOffsets.indexOf(new EdgeOffset(busFrom.getName()+busTo.getName()))).offset;
-					} else {
-						edgeOffsets.add(new EdgeOffset(busFrom.getName()+busTo.getName()));
-					}
-
-					karta.drawLine(busFrom.xpos + offset, busFrom.ypos,
-								   busTo.xpos + offset, busTo.ypos, color, 3.0f, DrawGraph.Layer.BASE);
+					karta.drawLine(busFrom.xpos, busFrom.ypos,
+								   busTo.xpos, busTo.ypos, color, 3.0f, DrawGraph.Layer.BASE);
 					from = to;
 				}
 			}
