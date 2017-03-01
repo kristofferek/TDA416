@@ -204,7 +204,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 				// draw the MST
 				BusStop from = noderna.find(be.from);
 				BusStop to   = noderna.find(be.to);
-				karta.drawLine(from.xpos, from.ypos, to.xpos, to.ypos, Color.red, 2.5, DrawGraph.Layer.OVERLAY);
+				karta.drawLine(from.xpos, from.ypos, to.xpos, to.ypos, Color.red, 4, DrawGraph.Layer.OVERLAY);
 			}
 			karta.repaint();
 			route.append( "Antal: " + totNodes + " totalvikt: " + totWeight + "\n");
@@ -287,7 +287,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			// Read stops and put them in the node-table 
 			// in order to give the user a list of possible stops
 			// assume input file is correct
-			indata = new Scanner(new File("D:\\Git\\TDA416\\src\\stops.noBOM.txt"), "UTF-8");
+			indata = new Scanner(new File("D:\\Git\\TDA416\\stops.noBOM.txt"), "UTF-8");
 			while (indata.hasNext()) {
 				String hpl = indata.next().trim();
 				int xco = indata.nextInt();
@@ -305,7 +305,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			indata.close();
 			
 			//  Read in the lines and add to the graph
-			indata =  new Scanner(new File("D:\\Git\\TDA416\\src\\lines.noBOM.txt"), "UTF-8");
+			indata =  new Scanner(new File("D:\\Git\\TDA416\\lines.noBOM.txt"), "UTF-8");
 			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
 			ArrayList<EdgeOffset> edgeOffsets = new ArrayList<>();
 			while ( indata.hasNext() ) {

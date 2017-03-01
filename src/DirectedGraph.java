@@ -1,12 +1,19 @@
 
 import java.util.*;
 
+/**
+ * Class containing the graph. Made up by a Subclass to the Edge class.
+ * Has methods for getting the shortest path between two Nodes and to get the minimum spanning tree.
+ * @author Long Nguyen, Kristoffer Ek
+ * @version (2017)
+ */
 public class DirectedGraph<E extends Edge> {
 
 	private int nbrOfNodes;
 	private List<E>[] edges;
 
 	public DirectedGraph(int noOfNodes) {
+	    nbrOfNodes = noOfNodes;
 		edges = new List[noOfNodes];
 		for (int i = 0; i < noOfNodes; i++) {
 			edges[i] = new LinkedList<E>();
@@ -16,7 +23,10 @@ public class DirectedGraph<E extends Edge> {
     public void addEdge(E e) {
 		edges[e.getSource()].add(e);
     }
-	public Iterator<E> shortestPath(int from, int to) {
+
+
+
+    public Iterator<E> shortestPath(int from, int to) {
         List<Integer> visited = new ArrayList<>(); //Keeps track of the visited nodes.
 	    PriorityQueue<CompDijkstraPath<E>> queue = new PriorityQueue<>(); //Shortest path so far is always on top.
         queue.add(new CompDijkstraPath<>(from, 0, new LinkedList<>())); // Start node
@@ -32,7 +42,7 @@ public class DirectedGraph<E extends Edge> {
                         LinkedList<E> path = new LinkedList<>();
                         path.addAll(ssf.getRoute());
                         path.add(e);
-                        queue.add(new CompDijkstraPath<E>(e.getDest(), ssf.getCost() + e.getWeight(), path));
+                        queue.add(new CompDijkstraPath<>(e.getDest(), ssf.getCost() + e.getWeight(), path));
                     }
                 }
             }
@@ -42,8 +52,6 @@ public class DirectedGraph<E extends Edge> {
 		
 	public Iterator<E> minimumSpanningTree()
     {
-
-        
         LinkedList<E>[] cc = new LinkedList[nbrOfNodes];
         PriorityQueue<CompKruskalEdge> kruskalPQ = new PriorityQueue<CompKruskalEdge>();
 

@@ -8,7 +8,6 @@ public class CompKruskalEdge<E extends Edge> implements Comparable<CompKruskalEd
 
     public CompKruskalEdge(E e)
     {
-        super();
         edge = e;
     }
 
