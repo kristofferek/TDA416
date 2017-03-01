@@ -3,10 +3,7 @@ import java.util.*;
 
 public class DirectedGraph<E extends Edge> {
 
-<<<<<<< HEAD
 	private int nbrOfNodes;
-=======
->>>>>>> e0d1046d538bf3eb2f28e61ddadf3ecd1c35baf7
 	private List<E>[] edges;
 
 	public DirectedGraph(int noOfNodes) {
@@ -16,16 +13,9 @@ public class DirectedGraph<E extends Edge> {
 		}
 	}
 
-<<<<<<< HEAD
-	public void addEdge(E e) {
+    public void addEdge(E e) {
 		edges[e.getSource()].add(e);
     }
-=======
-	public void addEdge(E edge) {
-		edges[edge.getSource()].add(edge);
-	}
->>>>>>> e0d1046d538bf3eb2f28e61ddadf3ecd1c35baf7
-
 	public Iterator<E> shortestPath(int from, int to) {
         List<Integer> visited = new ArrayList<>(); //Keeps track of the visited nodes.
 	    PriorityQueue<CompDijkstraPath<E>> queue = new PriorityQueue<>(); //Shortest path so far is always on top.
